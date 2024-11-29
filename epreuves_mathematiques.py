@@ -1,7 +1,8 @@
 import random
 
-"""Pour le jeu factorielle, on prend un nombre aléatoire et on calcule la factorielle par recursivité, puis on demande au joeueur d'entrer une valeur, et on renvoie True si il a bon, False sinon"""
 def jeu_factorielle():
+    """Pour le jeu factorielle, on prend un nombre aléatoire et on calcule la factorielle par recursivité, puis on demande au joeueur d'entrer une valeur, et on renvoie True si il a bon, False sinon"""
+
     n = random.randint(1, 10)
     facto = factorielle(n)
     message="Factoriel de " + str(n) + " ? "
@@ -15,8 +16,9 @@ def factorielle(n):
 
 
 
-"""Pour le jeu de la roulette mathematique, on selectionne 5 nombres aléatoires, puis on operation et on retourne True ou False si la reponse du joueur est bonne ou pas"""
 def roulette_mathematique():
+    """Pour le jeu de la roulette mathematique, on selectionne 5 nombres aléatoires, puis on operation et on retourne True ou False si la reponse du joueur est bonne ou pas"""
+
     liste=[]
     operations=["+", "-", "*"]
     for i in range(5):
@@ -40,8 +42,8 @@ def roulette_mathematique():
 
 
 
-"""Pour le jeu de l'equation, on prend un nombre a et b entre -10 et 10, on resoud l'equation puis on l'arrondi et on renvoie True ou False en fonction de l'entrée du joueur"""
 def  resoudre_equation_lineaire():
+    """Pour le jeu de l'equation, on prend un nombre a et b entre -10 et 10, on resoud l'equation puis on l'arrondi et on renvoie True ou False en fonction de l'entrée du joueur"""
 
     nombres_possibles = list(range(-10, 11))
     nombres_possibles.remove(0)
