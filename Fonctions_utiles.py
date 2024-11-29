@@ -1,9 +1,11 @@
 """ Dans ce module, nous allons mettre les fonctions utiles au deroulement de notre programme"""
-from pyexpat.errors import messages
-
+import fenetre_graphique
+from fenetre_graphique import *
 from epreuves_mathematiques import *
+
 import json
 
+ecran = fenetre_graphique.ecran
 liste_mini_jeux=["factorielle", "roulette_mathematique", "equation"]
 
 def introduction():
@@ -17,8 +19,10 @@ def composer_equipe():
     liste_player=[]
     nbJoueurs=-1
     while nbJoueurs <= 0 or nbJoueurs > 3:
+
         try:
-            nbJoueurs=int(input("Nombre de joueurs par equipe (entre 1 et 3) : "))
+            nbJoueurs=entrer_texte(ecran, ((200, 200), (200, 200)), 24)
+            ecran.fill("Black")
         except:
             nbJoueurs=-1
 
@@ -28,8 +32,9 @@ def composer_equipe():
         else:
             print("Equipe 2")
 
-        prenom = input("Prenom : ")
-        nom = input("Nom : ")
+
+        prenom = entrer_texte(ecran, ((200, 200), (200, 200)), 24)
+        nom = entrer_texte(ecran, ((200, 200), (200, 200)), 24)
         present = False
         for personne in donnees:
             if personne["Nom"] == nom and personne["Prenom"] == prenom:
