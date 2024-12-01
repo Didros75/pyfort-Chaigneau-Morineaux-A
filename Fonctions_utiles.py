@@ -5,36 +5,38 @@ from epreuves_mathematiques import *
 
 import json
 
+boyard_fond=pygame.image.load('Assets/img.png')
+boyard_fond = pygame.transform.scale(boyard_fond, ecran.get_size())
 ecran = fenetre_graphique.ecran
-liste_mini_jeux=["factorielle", "roulette_mathematique", "equation"]
 
 def introduction():
     print("Bienvenue sur Fort Boyard Simulator ! \n Constituez deux equipes de 1 a 3 joueurs et affrontez vous dans une serie de mini jeux dans le but de gagner des clés et d'acceder a la salle du tresor !")
 
 def composer_equipe():
+    ecran.blit(boyard_fond, (0, 0))
     with open('players_sauvegarde.json', 'r', encoding='utf-8') as f:
         donnees = json.load(f)
 
-
     liste_player=[]
-    nbJoueurs=-1
-    while nbJoueurs <= 0 or nbJoueurs > 3:
 
-        try:
-            nbJoueurs=entrer_texte(ecran, ((200, 200), (200, 200)), 24)
-            ecran.fill("Black")
-        except:
-            nbJoueurs=-1
+    nbJoueurs=0
+    while nbJoueurs == 0:
+        nbJoueurs=choix_multiple(["1 joueur", "2 joueurs", "3 joueurs"])
+    ecran.blit(boyard_fond, (0, 0))
 
     for i in range(nbJoueurs*2):
         if i<nbJoueurs:
-            print("Equipe 1")
+            afficher_texte(ecran, "Equipe1", 24, ((200, 100), (300, 70)))
         else:
-            print("Equipe 2")
+            ecran.blit(boyard_fond, (0, 0))
+            afficher_texte(ecran, "Equipe2", 24, ((200, 100), (300, 70)))
 
 
-        prenom = entrer_texte(ecran, ((200, 200), (200, 200)), 24)
-        nom = entrer_texte(ecran, ((200, 200), (200, 200)), 24)
+        afficher_texte(ecran, "Prenom", 24, ((100, 200), (300, 70)))
+        prenom = entrer_texte(ecran, ((200, 200), (300, 50)), 24)
+        afficher_texte(ecran, "Nom", 24, ((100, 300), (300, 70)))
+        nom = entrer_texte(ecran, ((200, 300), (300, 50)), 24)
+
         present = False
         for personne in donnees:
             if personne["Nom"] == nom and personne["Prenom"] == prenom:
@@ -56,11 +58,20 @@ def composer_equipe():
     return equipe1, equipe2
 
 def menu_epreuves():
+    liste_catgories = ["Maths", "Hasard", "Logique", "Enigme"]
+    liste_mini_jeux_maths = ["factorielle", "roulette_mathematique", "equation"]
+    categorie=""
     jeu=""
-    message="Choisis un jeu parmis " + str(liste_mini_jeux) + " : "
-    while jeu not in liste_mini_jeux:
-        jeu=input(message)
-    print("Jeu :", jeu)
+    message="Choisis une catégorie parmis " + str(liste_catgories) + " : "
+
+    while categorie == "":
+        afficher_texte(ecran, message, 24, ((200, 550), (300, 70)))
+        categorie=liste_catgories[choix_multiple(liste_catgories)-1]
+
+    ecran.blit(boyard_fond, (0, 0))
+
+    if categorie=="Maths":
+        jeu=random.choice(liste_mini_jeux_maths)
     if jeu=="factorielle":
         return jeu_factorielle()
     elif jeu=="roulette_mathematique":
@@ -69,11 +80,17 @@ def menu_epreuves():
         return epreuve_math_equation()
 
 def choisir_joueur(equipe):
-    candidat=""
-    while candidat not in equipe:
-        message="choisissez un candidat parmi "+ str(equipe) + " : "
-        candidat=input(message)
-    return candidat
+    candidat="^"
+    afficher_texte(ecran, "Choisir le joueur parmis " + str(equipe), 30, ((400, 400),(300, 300)))
+    while candidat == "^":
+
+        if len(equipe)==1:
+            candidat=choix_multiple([equipe[0]])
+        elif len(equipe)==2:
+            candidat=choix_multiple([equipe[0], equipe[1]])
+        else:
+            candidat = choix_multiple([equipe[0], equipe[2], equipe[3]])
+    return equipe[candidat-1]
 
 
 def epreuve_finale(equipe_numero, equipe):

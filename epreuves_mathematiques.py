@@ -1,4 +1,8 @@
 import random
+import fenetre_graphique
+from fenetre_graphique import *
+ecran = fenetre_graphique.ecran
+position_reponses=((200, 300),(300, 50))
 
 def jeu_factorielle():
     """Pour le jeu factorielle, on prend un nombre aléatoire et on calcule la factorielle par recursivité, puis on demande au joeueur d'entrer une valeur, et on renvoie True si il a bon, False sinon"""
@@ -6,7 +10,8 @@ def jeu_factorielle():
     n = random.randint(1, 10)
     facto = factorielle(n)
     message="Factoriel de " + str(n) + " ? "
-    return facto == int(input(message))
+    afficher_texte(ecran, message, 24, ((200, 200),(200, 200)))
+    return facto == entrer_texte(ecran, position_reponses, 24)
 
 def factorielle(n):
     if n == 1:
@@ -26,19 +31,22 @@ def roulette_mathematique():
     operation_choisie=random.choice(operations)
     if operation_choisie == "+":
         message=str(liste)+"\nCalculez le résultat en combinant ces nombres avec une addition "
-        return sum(liste)==int(input(message))
+        afficher_texte(ecran, message, 24, ((200, 200), (200, 200)))
+        return sum(liste)==entrer_texte(ecran, ((300, 200),(200, 200)), 24)
     elif operation_choisie == "-":
         diff=liste[0]
         for i in range(1, len(liste)):
             diff-=liste[i]
         message = str(liste) + "\nCalculez le résultat en combinant ces nombres avec une soustaction "
-        return diff == int(input(message))
+        afficher_texte(ecran, message, 24, ((200, 200), (200, 200)))
+        return diff == entrer_texte(ecran, position_reponses, 24)
     elif operation_choisie == "*":
         mult = liste[0]
         for i in range(1, len(liste)):
             mult *= liste[i]
         message = str(liste) + "\nCalculez le résultat en combinant ces nombres avec une multiplication "
-        return mult == int(input(message))
+        afficher_texte(ecran, message, 24, ((200, 200), (200, 200)))
+        return mult == entrer_texte(ecran, position_reponses, 24)
 
 
 
@@ -61,5 +69,5 @@ def epreuve_math_equation():
     resultat=arrondir(list[2])
     print(resultat)
     message="Resolvez l'equation "+ str(list[0]) +"x + "+ str(list[1]) + " (arrondi a la première decimale) : "
-
-    return str(resultat) == input(message)
+    afficher_texte(ecran, message, 24, ((200, 200), (200, 200)))
+    return str(resultat) == entrer_texte(ecran, position_reponses, 24)
