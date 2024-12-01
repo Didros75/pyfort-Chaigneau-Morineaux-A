@@ -50,7 +50,7 @@ def composer_equipe():
             prenom_nom=prenom + " " + nom
             liste_player.append(prenom_nom)
     with open('players_sauvegarde.json', 'w', encoding='utf-8') as f:
-        json.dump(donnees, f)
+        json.dump(donnees, f, indent=4)
 
     equipe1=liste_player[:int(len(liste_player)/2)]
     equipe2=liste_player[int(len(liste_player)/2):]

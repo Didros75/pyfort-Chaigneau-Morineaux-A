@@ -5,6 +5,8 @@ from pygame.locals import *
 from pygame import *
 import pygame.locals
 
+print(leader_board())
+
 pygame.init()
 ecran = fenetre_graphique.ecran
 boyard = pygame.image.load('Assets/img.png')
