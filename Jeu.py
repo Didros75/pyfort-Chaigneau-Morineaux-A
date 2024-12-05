@@ -53,19 +53,20 @@ while continuer:
         afficher_texte(ecran, "Equipe 1, a toi de jouer", 24, ((100, 200), (200, 200)))
         candidat="^"
         while candidat=="^":
-
             candidat = choisir_joueur(equipe1)
 
         ecran.blit(boyard, (0, 0))
         message="A "+ str(candidat) + " de jouer"
         afficher_texte(ecran, message, 24, ((100, 250), (200, 200)))
 
-        if menu_epreuves():
+        if menu_epreuves() == True:
             clé_equipe1+=1
+            print(clé_equipe1)
             message="Vous avez gagné une clé ! Vous avez "+ str(clé_equipe1)+ " clés !"
             afficher_texte(ecran, message, 24, ((300, 200), (200, 200)))
         else:
             afficher_texte(ecran, "Dommage", 24, ((300, 200), (200, 200)))
+            print("dommage")
 
         if clé_equipe1==3:
             epreuve_finale("equipe1", equipe1)

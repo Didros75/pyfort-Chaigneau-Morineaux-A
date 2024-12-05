@@ -11,7 +11,7 @@ def jeu_factorielle():
     facto = factorielle(n)
     message="Factoriel de " + str(n) + " ? "
     afficher_texte(ecran, message, 24, ((200, 200),(200, 200)))
-    return facto == entrer_texte(ecran, position_reponses, 24)
+    return str(facto) == entrer_texte(ecran, position_reponses, 24)
 
 def factorielle(n):
     if n == 1:
@@ -32,21 +32,21 @@ def roulette_mathematique():
     if operation_choisie == "+":
         message=str(liste)+"\nCalculez le résultat en combinant ces nombres avec une addition "
         afficher_texte(ecran, message, 24, ((200, 200), (200, 200)))
-        return sum(liste)==entrer_texte(ecran, ((300, 200),(200, 200)), 24)
+        return str(sum(liste))==entrer_texte(ecran, position_reponses, 24)
     elif operation_choisie == "-":
         diff=liste[0]
         for i in range(1, len(liste)):
             diff-=liste[i]
         message = str(liste) + "\nCalculez le résultat en combinant ces nombres avec une soustaction "
         afficher_texte(ecran, message, 24, ((200, 200), (200, 200)))
-        return diff == entrer_texte(ecran, position_reponses, 24)
+        return str(diff) == entrer_texte(ecran, position_reponses, 24)
     elif operation_choisie == "*":
         mult = liste[0]
         for i in range(1, len(liste)):
             mult *= liste[i]
         message = str(liste) + "\nCalculez le résultat en combinant ces nombres avec une multiplication "
         afficher_texte(ecran, message, 24, ((200, 200), (200, 200)))
-        return mult == entrer_texte(ecran, position_reponses, 24)
+        return str(mult) == entrer_texte(ecran, position_reponses, 24)
 
 
 
@@ -58,6 +58,7 @@ def  resoudre_equation_lineaire():
     a=random.choice(nombres_possibles)
     b=random.choice(nombres_possibles)
     return a, b, -b/a
+
 def arrondir(nombre):
     if nombre.is_integer():
         return round(nombre)
