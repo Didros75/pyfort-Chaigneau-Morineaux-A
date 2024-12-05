@@ -5,6 +5,7 @@ from pygame.locals import *
 from pygame import *
 import pygame.locals
 
+print(test)
 print(leader_board())
 
 pygame.init()
