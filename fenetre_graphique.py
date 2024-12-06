@@ -25,7 +25,7 @@ def choix_multiple(textes):
 
     n = len(textes)
     espacement = largeur_ecran // (n + 1)
-    y_position = int(5 * hauteur_ecran / 6)
+    y_position = int(4 * hauteur_ecran / 6)
 
 
     boutons = []
@@ -74,9 +74,7 @@ def entrer_texte(ecran, rect, taille):
 def creer_bouton(x, y, taille_x, taille_y, ecran, texte, taille_police=30, couleur_bouton="black",couleur_texte="white"):
 
     Rect = pygame.Rect(x, y, taille_x, taille_y)
-    bouton_petit=pygame.image.load('Assets/bouton_petit.png')
-    bouton_petit = pygame.transform.scale(bouton_petit, (taille_x, taille_y))
-    ecran.blit(bouton_petit, (x, y))
+
 
     if texte:
         font = pygame.font.SysFont('Comic Sans MS,Arial', taille_police)

@@ -7,13 +7,17 @@ import json
 
 boyard_fond=pygame.image.load('Assets/img.png')
 boyard_fond = pygame.transform.scale(boyard_fond, ecran.get_size())
+Menu_equipe = pygame.image.load('Assets/Menu_equipe.jpg')
+Menu_equipe = pygame.transform.scale(Menu_equipe, ecran.get_size())
+Menu_nb_equipe = pygame.image.load('Assets/nb_equipe.jpg')
+Menu_nb_equipe = pygame.transform.scale(Menu_nb_equipe, ecran.get_size())
 ecran = fenetre_graphique.ecran
 
 def introduction():
     print("Bienvenue sur Fort Boyard Simulator ! \n Constituez deux equipes de 1 a 3 joueurs et affrontez vous dans une serie de mini jeux dans le but de gagner des clés et d'acceder a la salle du tresor !")
 
 def composer_equipe():
-    ecran.blit(boyard_fond, (0, 0))
+    ecran.blit(Menu_nb_equipe, (0, 0))
     with open('players_sauvegarde.json', 'r', encoding='utf-8') as f:
         donnees = json.load(f)
 
@@ -22,13 +26,13 @@ def composer_equipe():
     nbJoueurs=0
     while nbJoueurs == 0:
         nbJoueurs=choix_multiple(["1 joueur", "2 joueurs", "3 joueurs"])
-    ecran.blit(boyard_fond, (0, 0))
+    ecran.blit(Menu_equipe, (0, 0))
 
     for i in range(nbJoueurs*2):
         if i<nbJoueurs:
             afficher_texte(ecran, "Equipe1", 24, ((200, 100), (300, 70)))
         else:
-            ecran.blit(boyard_fond, (0, 0))
+            ecran.blit(Menu_equipe, (0, 0))
             afficher_texte(ecran, "Equipe2", 24, ((200, 100), (300, 70)))
 
 
@@ -97,7 +101,7 @@ def choisir_joueur(equipe):
         elif len(equipe)==2:
             candidat=choix_multiple([equipe[0], equipe[1]])
         else:
-            candidat = choix_multiple([equipe[0], equipe[2], equipe[3]])
+            candidat = choix_multiple([equipe[0], equipe[1], equipe[2]])
     return equipe[candidat-1]
 
 

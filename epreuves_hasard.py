@@ -27,4 +27,19 @@ def jeu_lance_des():
     return False
 
 def bonneteau():
-    liste=[1,2,3]
+    liste=["A","B","C"]
+    nb_tentatives=2
+    print("Vous devez deviner sous quel Bonneteau ce trouve la clé et pour cela vous avez deux essais")
+    print("A","B","C")
+    for i in range(2):
+        print("il vous reste ", nb_tentatives, " tentatives")
+        lettre=random.choice(liste)
+        Bonneteau_choisi=input("choisissez un Bonneteau A, B ou C")
+        if Bonneteau_choisi==lettre:
+            print("Bravo la clé est sous le Bonneteau")
+            return True
+        else:
+            print("Vous n'avez pas réussi cette tentative")
+        nb_tentatives-=1
+    print("Vous avez perdu")
+    return False
