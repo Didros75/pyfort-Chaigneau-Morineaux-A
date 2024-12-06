@@ -2,7 +2,7 @@
 import fenetre_graphique
 from fenetre_graphique import *
 from epreuves_mathematiques import *
-
+from epreuves_hasard import *
 import json
 
 boyard_fond=pygame.image.load('Assets/img.png')
@@ -60,6 +60,7 @@ def composer_equipe():
 def menu_epreuves():
     liste_catgories = ["Maths", "Hasard", "Logique", "Enigme"]
     liste_mini_jeux_maths = ["factorielle", "roulette_mathematique", "equation"]
+    liste_mini_jeux_hasard = ["dés","Bonneteau"]
     categorie=""
     jeu=""
     message="Choisis une catégorie parmis " + str(liste_catgories) + " : "
@@ -78,6 +79,13 @@ def menu_epreuves():
         return roulette_mathematique()
     elif jeu=="equation":
         return epreuve_math_equation()
+
+    if categorie=="Hasard":
+        jeu=random.choice(liste_mini_jeux_hasard)
+    if jeu=="dés":
+        return jeu_lance_des()
+    elif jeu=="Bonneteau":
+        return bonneteau()
 
 def choisir_joueur(equipe):
     candidat="^"
