@@ -6,7 +6,8 @@ ecran = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 boyard2=pygame.image.load('Assets/img.png')
 boyard2 = pygame.transform.scale(boyard2, ecran.get_size())
 bouton_petit=pygame.image.load('Assets/bouton_petit.png')
-
+trois_choix=pygame.image.load('Assets/3choix.jpg')
+trois_choix=pygame.transform.scale(trois_choix,ecran.get_size())
 fenetre="Menu"
 
 def afficher_texte(ecran, texte, taille, position):
@@ -17,16 +18,13 @@ def afficher_texte(ecran, texte, taille, position):
 
 
 def choix_multiple(textes):
-
     screen_size = pygame.display.get_surface().get_size()
     largeur_ecran = screen_size[0]
     hauteur_ecran = screen_size[1]
 
-
     n = len(textes)
     espacement = largeur_ecran // (n + 1)
     y_position = int(4 * hauteur_ecran / 6)
-
 
     boutons = []
     for i, texte in enumerate(textes):
@@ -37,9 +35,19 @@ def choix_multiple(textes):
     pygame.display.flip()
 
     while True:
-        for i, bouton in enumerate(boutons):
-            if clique_bouton(bouton):
-                return i + 1
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                return None
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                i = 0
+                for bouton in boutons:
+                    if clique_bouton(bouton):
+                        return i + 1
+                    i += 1
+
+        pygame.display.update()
 
 
 def entrer_texte(ecran, rect, taille):
@@ -71,24 +79,25 @@ def entrer_texte(ecran, rect, taille):
             pygame.display.update()
 
 
-def creer_bouton(x, y, taille_x, taille_y, ecran, texte, taille_police=30, couleur_bouton="black",couleur_texte="white"):
+def afficher_batons_graphique(ecran, nb_batons):
+    ecran.blit(trois_choix, (0, 0))
+    screen_width = ecran.get_width()-50
+    screen_height = ecran.get_height()
+    for i in range(nb_batons):
+        pygame.draw.line(ecran, "black", (50 + i * screen_width // 19, screen_height // 2 + 100),
+                         (50 + i * screen_width // 19, screen_height // 2 - 100), 10)
 
-    Rect = pygame.Rect(x, y, taille_x, taille_y)
+        pygame.display.update()
 
-
-    if texte:
-        font = pygame.font.SysFont('Comic Sans MS,Arial', taille_police)
-        texte_rendu = font.render(texte, True, couleur_texte)
-
-
-        texte_rect = texte_rendu.get_rect(center=Rect.center)
-        ecran.blit(texte_rendu, texte_rect)
-
-    return Rect
+def creer_bouton(x, y, largeur, hauteur, surface, texte):
+    rect = pygame.Rect(x, y, largeur, hauteur)
+    pygame.draw.rect(surface, (0, 128, 255), rect)  # Bleu
+    font = pygame.font.Font(None, 36)
+    texte_surface = font.render(texte, True, (255, 255, 255))  # Blanc
+    texte_rect = texte_surface.get_rect(center=rect.center)
+    surface.blit(texte_surface, texte_rect)
+    return rect
 
 def clique_bouton(bouton):
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if bouton.collidepoint(event.pos):
-                return True
-
+    mouse_pos = pygame.mouse.get_pos()
+    return bouton.collidepoint(mouse_pos)

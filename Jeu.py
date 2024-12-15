@@ -1,3 +1,5 @@
+import time
+
 from Fonctions_utiles import *
 from fenetre_graphique import *
 import pygame
@@ -47,8 +49,12 @@ while continuer:
 
     if fenetre=="Menu":
         ecran.blit(boyard, (0, 0))
-        if clique_bouton(play_bouton):
-            fenetre = "nbEquipes"
+        choix=0
+
+        for event in pygame.event.get():
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if clique_bouton(play_bouton):
+                    fenetre = "nbEquipes"
 
     if fenetre == "nbEquipes":
         ecran.blit(Menu_nb_equipe, (0, 0))
@@ -73,9 +79,11 @@ while continuer:
             print(clé_equipe1)
             message="Vous avez gagné une clé ! Vous avez "+ str(clé_equipe1)+ " clés !"
             afficher_texte(ecran, message, 24, ((300, 200), (200, 200)))
+
         else:
             afficher_texte(ecran, "Dommage", 24, ((300, 200), (200, 200)))
             print("dommage")
+
 
         if clé_equipe1==3:
             epreuve_finale("equipe1", equipe1)
@@ -95,6 +103,7 @@ while continuer:
             clé_equipe2 += 1
             message = "Vous avez gagné une clé ! Vous avez " + str(clé_equipe2) + " clés !"
             afficher_texte(ecran, message, 24, ((300, 200), (200, 200)))
+
         else:
             afficher_texte(ecran, "Dommage", 24, ((300, 200), (200, 200)))
 

@@ -3,6 +3,7 @@ import fenetre_graphique
 from fenetre_graphique import *
 from epreuves_mathematiques import *
 from epreuves_hasard import *
+from epreuves_logiques import *
 import json
 
 boyard_fond=pygame.image.load('Assets/img.png')
@@ -27,19 +28,29 @@ def composer_equipe():
     while nbJoueurs == 0:
         nbJoueurs=choix_multiple(["1 joueur", "2 joueurs", "3 joueurs"])
     ecran.blit(Menu_equipe, (0, 0))
-
+    e1=[]
+    e2=[]
     for i in range(nbJoueurs*2):
         if i<nbJoueurs:
-            afficher_texte(ecran, "Equipe1", 24, ((200, 100), (300, 70)))
+
+            prenom = entrer_texte(ecran, ((200, 210), (300, 50)), 24)
+            nom = entrer_texte(ecran, ((200, 300), (300, 50)), 24)
+            e1.append(prenom)
+            pygame.draw.rect(ecran, "black", ((200, 210), (300, 50)))
+            pygame.draw.rect(ecran, "black", ((200, 300), (300, 50)))
+            for i in range(len(e1)):
+                afficher_texte(ecran, e1[i], 40, (200, 400+i*40))
         else:
-            ecran.blit(Menu_equipe, (0, 0))
-            afficher_texte(ecran, "Equipe2", 24, ((200, 100), (300, 70)))
+            prenom = entrer_texte(ecran, ((760, 210), (300, 50)), 24)
+            nom = entrer_texte(ecran, ((760, 300), (300, 50)), 24)
+            e2.append(prenom)
+            pygame.draw.rect(ecran, "black", ((760, 210), (300, 50)))
+            pygame.draw.rect(ecran, "black", ((760, 300), (300, 50)))
+            for i in range(len(e2)):
+                afficher_texte(ecran, e2[i], 40, (760, 400 + i * 40))
 
 
-        afficher_texte(ecran, "Prenom", 24, ((100, 200), (300, 70)))
-        prenom = entrer_texte(ecran, ((200, 200), (300, 50)), 24)
-        afficher_texte(ecran, "Nom", 24, ((100, 300), (300, 70)))
-        nom = entrer_texte(ecran, ((200, 300), (300, 50)), 24)
+
 
         present = False
         for personne in donnees:
@@ -65,6 +76,7 @@ def menu_epreuves():
     liste_catgories = ["Maths", "Hasard", "Logique", "Enigme"]
     liste_mini_jeux_maths = ["factorielle", "roulette_mathematique", "equation"]
     liste_mini_jeux_hasard = ["dés","Bonneteau"]
+    liste_mini_jeux_logique=["nim"]
     categorie=""
     jeu=""
     message="Choisis une catégorie parmis " + str(liste_catgories) + " : "
@@ -90,6 +102,9 @@ def menu_epreuves():
         return jeu_lance_des()
     elif jeu=="Bonneteau":
         return bonneteau()
+
+    if categorie=="Logique":
+        return jeu_nim()
 
 def choisir_joueur(equipe):
     candidat="^"

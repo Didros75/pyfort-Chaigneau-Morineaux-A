@@ -1,15 +1,17 @@
 import pygame
+from fenetre_graphique import *
+import time
+import fenetre_graphique
+ecran = fenetre_graphique.ecran
 
-import random
 
 def afficher_batonnets(n):
-    for i in range(n):
-        print("|")
+    afficher_batons_graphique(ecran, n)
 
 def joueur_retrait(n):
     choix=-1
     while choix == -1:
-        choix=int(input("Choisi un nombre de batonnets a enlever"))
+        choix=choix_multiple(["1 bâton", "2 bâtons", "3 bâtons"])
 
     return choix
 
@@ -25,14 +27,12 @@ def jeu_nim():
     while batonnets>0:
         afficher_batonnets(batonnets)
         if tour_joueur:
-            print("Au joueur de jouer :")
             batonnets-=joueur_retrait(batonnets)
             tour_joueur=False
         else:
+            time.sleep(1)
             choix_maitre=maitre_retrait(batonnets)
-            print("Le maitre du jeu enleve", str(choix_maitre), "batonnets")
             batonnets-=choix_maitre
             tour_joueur=True
     return tour_joueur
 
-print(jeu_nim())
