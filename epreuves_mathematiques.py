@@ -1,16 +1,21 @@
 import random
 import fenetre_graphique
 from fenetre_graphique import *
+import pygame
 ecran = fenetre_graphique.ecran
-position_reponses=((200, 300),(300, 50))
+position_reponses=((120, 480),(300, 50))
+Menu_maths=pygame.image.load('Assets/Maths_willy.jpg')
+Menu_maths = pygame.transform.scale(Menu_maths, ecran.get_size())
 
 def jeu_factorielle():
     """Pour le jeu factorielle, on prend un nombre aléatoire et on calcule la factorielle par recursivité, puis on demande au joeueur d'entrer une valeur, et on renvoie True si il a bon, False sinon"""
-
+    ecran.blit(Menu_maths,(0,0))
+    pygame.display.flip()
     n = random.randint(1, 10)
     facto = factorielle(n)
     message="Factoriel de " + str(n) + " ? "
-    afficher_texte(ecran, message, 24, ((200, 200),(200, 200)))
+
+    afficher_texte(ecran, message, 24, ((150, 300),(200, 200)))
     return str(facto) == entrer_texte(ecran, position_reponses, 24)
 
 def factorielle(n):
@@ -23,7 +28,8 @@ def factorielle(n):
 
 def roulette_mathematique():
     """Pour le jeu de la roulette mathematique, on selectionne 5 nombres aléatoires, puis on operation et on retourne True ou False si la reponse du joueur est bonne ou pas"""
-
+    ecran.blit(Menu_maths, (0, 0))
+    pygame.display.flip()
     liste=[]
     operations=["+", "-", "*"]
     for i in range(5):
@@ -31,21 +37,21 @@ def roulette_mathematique():
     operation_choisie=random.choice(operations)
     if operation_choisie == "+":
         message=str(liste)+"\nCalculez le résultat en combinant ces nombres avec une addition "
-        afficher_texte(ecran, message, 24, ((200, 200), (200, 200)))
+        afficher_texte(ecran, message, 24, ((150, 300), (200, 200)))
         return str(sum(liste))==entrer_texte(ecran, position_reponses, 24)
     elif operation_choisie == "-":
         diff=liste[0]
         for i in range(1, len(liste)):
             diff-=liste[i]
         message = str(liste) + "\nCalculez le résultat en combinant ces nombres avec une soustaction "
-        afficher_texte(ecran, message, 24, ((200, 200), (200, 200)))
+        afficher_texte(ecran, message, 24, ((150, 300), (200, 200)))
         return str(diff) == entrer_texte(ecran, position_reponses, 24)
     elif operation_choisie == "*":
         mult = liste[0]
         for i in range(1, len(liste)):
             mult *= liste[i]
         message = str(liste) + "\nCalculez le résultat en combinant ces nombres avec une multiplication "
-        afficher_texte(ecran, message, 24, ((200, 200), (200, 200)))
+        afficher_texte(ecran, message, 24, ((150, 300), (200, 200)))
         return str(mult) == entrer_texte(ecran, position_reponses, 24)
 
 
@@ -66,9 +72,11 @@ def arrondir(nombre):
         return round(nombre, 1)
 
 def epreuve_math_equation():
+    ecran.blit(Menu_maths, (0, 0))
+    pygame.display.flip()
     list=resoudre_equation_lineaire()
     resultat=arrondir(list[2])
     print(resultat)
     message="Resolvez l'equation "+ str(list[0]) +"x + "+ str(list[1]) + " (arrondi a la première decimale) : "
-    afficher_texte(ecran, message, 24, ((200, 200), (200, 200)))
+    afficher_texte(ecran, message, 24, ((150, 300), (200, 200)))
     return str(resultat) == entrer_texte(ecran, position_reponses, 24)

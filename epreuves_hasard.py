@@ -1,16 +1,24 @@
 import random
-
+import pygame
+import fenetre_graphique
+from fenetre_graphique import *
+ecran=fenetre_graphique.ecran
+bonneteau_menu=pygame.image.load("Assets/Bonneteau.jpg")
+dé_menu=pygame.image.load("Assets/Dé.jpg")
+bonneteau_menu = pygame.transform.scale(bonneteau_menu, ecran.get_size())
+dé_menu = pygame.transform.scale(dé_menu, ecran.get_size())
 
 def jeu_lance_des():
+    ecran.blit(dé_menu, (0, 0))
+    pygame.display.flip()
     nb_essai=3
     des=[1,2,3,4,5,6]
     while nb_essai>0:
-        message="le nombre d'essais restant est "+str(nb_essai)
-        print(message)
-        print("lancez les dés en pressant la touche entrée")
-        input()
+        message=str(nb_essai) + "essais"
+        afficher_texte(ecran, message, 40, (400, 500))
+        choix_multiple(["Lancer"])
         de_joueur = (random.choice(des), random.choice(des))
-        print(de_joueur)
+        afficher_texte(ecran, de_joueur, 60, (300, 500))
         if de_joueur[0]==6 or de_joueur[1]==6:
             print("vous avez gagnez une clé")
             return True
@@ -27,19 +35,23 @@ def jeu_lance_des():
     return False
 
 def bonneteau():
-    liste=["A","B","C"]
+    ecran.blit(bonneteau_menu,(0,0))
+    pygame.display.flip()
+    liste=[1,2,3]
     nb_tentatives=2
-    print("Vous devez deviner sous quel Bonneteau ce trouve la clé et pour cela vous avez deux essais")
-    print("A","B","C")
+    afficher_texte(ecran, "Choisissez un Bonneteau", 30, (200, 50))
+
     for i in range(2):
-        print("il vous reste ", nb_tentatives, " tentatives")
+        texte='il vous reste ' + str(nb_tentatives)+ ' tentatives'
+        afficher_texte(ecran, texte, 30, (200, 90))
+
         lettre=random.choice(liste)
-        Bonneteau_choisi=input("choisissez un Bonneteau A, B ou C")
+        Bonneteau_choisi=choix_multiple(["A", "B", "C"])
         if Bonneteau_choisi==lettre:
-            print("Bravo la clé est sous le Bonneteau")
             return True
         else:
-            print("Vous n'avez pas réussi cette tentative")
+            afficher_texte(ecran, "dommage, essaye encore", 30, (200, 130))
+            ecran.blit(bonneteau_menu,(0,0))
         nb_tentatives-=1
     print("Vous avez perdu")
     return False

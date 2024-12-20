@@ -4,6 +4,7 @@ from fenetre_graphique import *
 from epreuves_mathematiques import *
 from epreuves_hasard import *
 from epreuves_logiques import *
+from enigme_pere_fouras import *
 import json
 
 boyard_fond=pygame.image.load('Assets/img.png')
@@ -12,6 +13,7 @@ Menu_equipe = pygame.image.load('Assets/Menu_equipe.jpg')
 Menu_equipe = pygame.transform.scale(Menu_equipe, ecran.get_size())
 Menu_nb_equipe = pygame.image.load('Assets/nb_equipe.jpg')
 Menu_nb_equipe = pygame.transform.scale(Menu_nb_equipe, ecran.get_size())
+
 ecran = fenetre_graphique.ecran
 
 def introduction():
@@ -75,8 +77,7 @@ def composer_equipe():
 def menu_epreuves():
     liste_catgories = ["Maths", "Hasard", "Logique", "Enigme"]
     liste_mini_jeux_maths = ["factorielle", "roulette_mathematique", "equation"]
-    liste_mini_jeux_hasard = ["dés","Bonneteau"]
-    liste_mini_jeux_logique=["nim"]
+    liste_mini_jeux_hasard = ["Bonneteau"]
     categorie=""
     jeu=""
     message="Choisis une catégorie parmis " + str(liste_catgories) + " : "
@@ -105,6 +106,9 @@ def menu_epreuves():
 
     if categorie=="Logique":
         return jeu_nim()
+
+    if categorie=="Enigme":
+        return enigme_pere_fouras()
 
 def choisir_joueur(equipe):
     candidat="^"
