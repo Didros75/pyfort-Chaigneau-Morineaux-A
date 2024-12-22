@@ -1,5 +1,7 @@
 import json
 import random
+from time import sleep
+
 import fenetre_graphique
 import pygame
 
@@ -35,12 +37,20 @@ def enigme_pere_fouras():
     while nb_essais>0:
         utilisateur_rep=entrer_texte(ecran, ((120, 595),(300, 50)), 30).lower()
         if utilisateur_rep in reponse:
-            print("vous avez gagner une clé")
+            message="vous avez gagner une clé !"
+            afficher_texte(ecran, message, 50, (120, 500))
+            sleep(4)
             return True
         else:
             nb_essais-=1
-            if nb_essais>0:
-                print("La réponse est incorrecte, il vous reste", nb_essais)
+            if nb_essais==2:
+                message="La réponse est incorrecte, il vous reste 2 essais"
+                afficher_texte(ecran, message, 30, (120, 500))
+            elif nb_essais==1:
+                message = "La réponse est incorrecte, il vous reste 1 essai"
+                afficher_texte(ecran, message, 30, (120, 550))
             else:
-                print("Vous avez échoué à l'énigme la solution était: ", reponse)
+                message="Vous avez échoué à l'énigme la solution était: " + str(reponse)
+                afficher_texte(ecran, message, 50, (120, 600))
+                sleep(4)
                 return False

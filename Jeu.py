@@ -1,5 +1,4 @@
 import time
-
 from Fonctions_utiles import *
 from fenetre_graphique import *
 import pygame
@@ -110,5 +109,3 @@ while continuer:
         if clé_equipe2==3:
             epreuve_finale("equipe2", equipe2)
             break
-
-

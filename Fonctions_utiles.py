@@ -5,6 +5,7 @@ from epreuves_mathematiques import *
 from epreuves_hasard import *
 from epreuves_logiques import *
 from enigme_pere_fouras import *
+from epreuve_finale import *
 import json
 
 boyard_fond=pygame.image.load('Assets/img.png')
@@ -17,7 +18,7 @@ Menu_nb_equipe = pygame.transform.scale(Menu_nb_equipe, ecran.get_size())
 ecran = fenetre_graphique.ecran
 
 def introduction():
-    print("Bienvenue sur Fort Boyard Simulator ! \n Constituez deux equipes de 1 a 3 joueurs et affrontez vous dans une serie de mini jeux dans le but de gagner des clés et d'acceder a la salle du tresor !")
+    print("Bienvenue sur Fort Boyard Simulator ! \n Constituez deux equipes de 1 a 3 joueurs et affrontez vous dans une serie de mini jeux dans le but de gagner des clés et d'accéder a la salle du tresor !")
 
 def composer_equipe():
     ecran.blit(Menu_nb_equipe, (0, 0))
@@ -32,6 +33,7 @@ def composer_equipe():
     ecran.blit(Menu_equipe, (0, 0))
     e1=[]
     e2=[]
+    #l'interface graphique ne dépend pas de la résolution de l'écran donc peux être décalée sur certain ordi
     for i in range(nbJoueurs*2):
         if i<nbJoueurs:
 
