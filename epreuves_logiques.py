@@ -1,3 +1,5 @@
+import random
+
 import pygame
 from fenetre_graphique import *
 import time
@@ -17,13 +19,14 @@ def joueur_retrait(n):
 
 def maitre_retrait(n):
     index=n
-    while index%4!=1:
+    while index%4!=1 and index>=n-2 or index==n:
         index=index-1
+
     return n-index
 
 def jeu_nim():
     batonnets=20
-    tour_joueur=False
+    tour_joueur=random.choice([True, False])
     while batonnets>0:
         afficher_batonnets(batonnets)
         if tour_joueur:

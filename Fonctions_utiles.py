@@ -16,9 +16,8 @@ Menu_equipe = pygame.image.load('Assets/Menu_equipe.jpg')
 Menu_equipe = pygame.transform.scale(Menu_equipe, ecran.get_size())
 Menu_nb_equipe = pygame.image.load('Assets/nb_equipe.jpg')
 Menu_nb_equipe = pygame.transform.scale(Menu_nb_equipe, ecran.get_size())
-Menu_neutre=pygame.image.load('Assets/document_0.jpg')
-Menu_neutre=pygame.transform.scale(Menu_neutre, ecran.get_size())
-
+Menu_neutre2=pygame.image.load('Assets/document_0.jpg')
+Menu_neutre2=pygame.transform.scale(Menu_neutre2, ecran.get_size())
 ecran = fenetre_graphique.ecran
 
 def introduction():
@@ -34,7 +33,7 @@ def composer_equipe():
     nbJoueurs=0
     while nbJoueurs == 0:
         nbJoueurs=choix_multiple(["1 joueur", "2 joueurs", "3 joueurs"])
-    ecran.blit(Menu_neutre, (0, 0))
+    ecran.blit(Menu_neutre2, (0, 0))
     e1=[]
     e2=[]
     #l'interface graphique ne dépend pas de la résolution de l'écran donc peux être décalée sur certain ordi
@@ -98,7 +97,7 @@ def menu_epreuves():
         afficher_texte(ecran, message, 50, ((100, 200), (300, 70)))
         categorie=liste_catgories[choix_multiple(liste_catgories)-1]
 
-    ecran.blit(Menu_neutre, (0, 0))
+    ecran.blit(Menu_neutre2, (0, 0))
 
     if categorie=="Maths":
         jeu=random.choice(liste_mini_jeux_maths)

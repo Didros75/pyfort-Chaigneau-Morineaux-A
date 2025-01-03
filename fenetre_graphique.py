@@ -9,6 +9,9 @@ bouton_petit=pygame.image.load('Assets/bouton_petit.png')
 bouton_petit=pygame.transform.scale(bouton_petit, (200, 100))
 trois_choix=pygame.image.load('Assets/3choix.jpg')
 trois_choix=pygame.transform.scale(trois_choix,ecran.get_size())
+Menu_neutre=pygame.image.load('Assets/document_0.jpg')
+Menu_neutre=pygame.transform.scale(Menu_neutre, ecran.get_size())
+
 fenetre="Menu"
 
 def afficher_texte(ecran, texte, taille, position):
@@ -19,6 +22,7 @@ def afficher_texte(ecran, texte, taille, position):
 
 
 def choix_multiple(textes):
+
     screen_size = pygame.display.get_surface().get_size()
     largeur_ecran = screen_size[0]
     hauteur_ecran = screen_size[1]
@@ -33,14 +37,19 @@ def choix_multiple(textes):
         bouton = creer_bouton(x_position, y_position, 200, 100, ecran, texte)
         boutons.append(bouton)
 
+
+
     pygame.display.flip()
 
     while True:
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 return None
-
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 i = 0
                 for bouton in boutons:
@@ -61,11 +70,12 @@ def entrer_texte(ecran, rect, taille):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-                if event.key in (pygame.K_RETURN, pygame.K_KP_ENTER):
-                    print(user_input_value)
+                if event.key == pygame.K_KP_ENTER:
                     return user_input_value
                 elif event.key == pygame.K_BACKSPACE:
                     user_input_value = user_input_value[:-1]
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
                 else:
                     user_input_value += event.unicode
 
@@ -81,7 +91,7 @@ def entrer_texte(ecran, rect, taille):
 
 
 def afficher_batons_graphique(ecran, nb_batons):
-    ecran.blit(trois_choix, (0, 0))
+    ecran.blit(Menu_neutre, (0, 0))
     screen_width = ecran.get_width()-50
     screen_height = ecran.get_height()
     for i in range(nb_batons):

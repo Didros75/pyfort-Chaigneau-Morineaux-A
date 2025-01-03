@@ -23,6 +23,11 @@ Menu_nb_equipe = pygame.image.load('Assets/nb_equipe.jpg')
 Menu_nb_equipe = pygame.transform.scale(Menu_nb_equipe, ecran.get_size())
 Menu_neutre=pygame.image.load('Assets/document_0.jpg')
 Menu_neutre=pygame.transform.scale(Menu_neutre, ecran.get_size())
+
+quit_bouton = creer_bouton(
+        ecran.get_width() - 210, 20, 100, 50, ecran, "Quitter"
+    )
+
 ecran.blit(boyard, (0, 0))
 pygame.display.flip()
 
@@ -33,12 +38,12 @@ fenetre="Menu"
 
 clé_equipe1 = 0
 clé_equipe2 = 0
-
 continuer=True
 
 while continuer:
 
-    play_bouton = creer_bouton(int(8*screen_size[0]/10), int(screen_size[1] / 4), 200, 100, ecran, "Play")
+
+    play_bouton = creer_bouton(int(8 * screen_size[0] / 10), int(screen_size[1] / 4), 200, 100, ecran, "Play")
 
     for event in pygame.event.get():
         if event.type == pygame.KEYDOWN:

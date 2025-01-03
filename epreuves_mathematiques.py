@@ -14,7 +14,7 @@ def jeu_factorielle():
     n = random.randint(1, 10)
     facto = factorielle(n)
     message="Factoriel de " + str(n) + " ? "
-
+    afficher_texte(ecran, "Question :", 40, ((150, 200), (200, 200)))
     afficher_texte(ecran, message, 24, ((150, 300),(200, 200)))
     return str(facto) == entrer_texte(ecran, position_reponses, 24)
 
@@ -35,23 +35,35 @@ def roulette_mathematique():
     for i in range(5):
         liste.append(random.randint(1, 20))
     operation_choisie=random.choice(operations)
+    afficher_texte(ecran, "Question :", 40, ((150, 200), (200, 200)))
     if operation_choisie == "+":
-        message=str(liste)+"\nCalculez le résultat en combinant ces nombres avec une addition "
-        afficher_texte(ecran, message, 24, ((150, 300), (200, 200)))
-        return str(sum(liste))==entrer_texte(ecran, position_reponses, 24)
+        add=0
+        for i in liste:
+            add+=i
+        message=str(liste)
+        message=message[1:-1]
+        afficher_texte(ecran, message, 30, ((150, 270), (200, 200)))
+        afficher_texte(ecran, "Calculez le résultat en combinant ces nombres avec une addition ", 30, ((150, 320), (200, 200)))
+        return str(add)==entrer_texte(ecran, position_reponses, 24)
     elif operation_choisie == "-":
         diff=liste[0]
         for i in range(1, len(liste)):
             diff-=liste[i]
-        message = str(liste) + "\nCalculez le résultat en combinant ces nombres avec une soustaction "
-        afficher_texte(ecran, message, 24, ((150, 300), (200, 200)))
+        message = str(liste)
+        message = message[1:-1]
+        afficher_texte(ecran, message, 30, ((150, 270), (200, 200)))
+        afficher_texte(ecran, "Calculez le résultat en combinant ces nombres avec une soustraction ", 30,
+                       ((150, 320), (200, 200)))
         return str(diff) == entrer_texte(ecran, position_reponses, 24)
     elif operation_choisie == "*":
         mult = liste[0]
         for i in range(1, len(liste)):
             mult *= liste[i]
-        message = str(liste) + "\nCalculez le résultat en combinant ces nombres avec une multiplication "
-        afficher_texte(ecran, message, 24, ((150, 300), (200, 200)))
+        message = str(liste)
+        message = message[1:-1]
+        afficher_texte(ecran, message, 30, ((150, 270), (200, 200)))
+        afficher_texte(ecran, "Calculez le résultat en combinant ces nombres avec une multiplication ", 30,
+                       ((150, 300), (220, 200)))
         return str(mult) == entrer_texte(ecran, position_reponses, 24)
 
 
@@ -77,6 +89,7 @@ def epreuve_math_equation():
     list=resoudre_equation_lineaire()
     resultat=arrondir(list[2])
     print(resultat)
+    afficher_texte(ecran, "Question :", 40, ((150, 200), (200, 200)))
     message="Resolvez l'equation "+ str(list[0]) +"x + "+ str(list[1]) + " (arrondi a la première decimale) : "
     afficher_texte(ecran, message, 24, ((150, 300), (200, 200)))
     return str(resultat) == entrer_texte(ecran, position_reponses, 24)

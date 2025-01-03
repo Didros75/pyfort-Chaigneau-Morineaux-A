@@ -31,26 +31,24 @@ def enigme_pere_fouras():
             reponse=i["reponse"].lower()
     enigme_coupée = enigme.split("\n")
     j=0
+    afficher_texte(ecran, "Enigme :", 50, (120, 160))
     for i in enigme_coupée:
         afficher_texte(ecran, i, 30, (120, 230+j*50))
         j+=1
     while nb_essais>0:
-        utilisateur_rep=entrer_texte(ecran, ((120, 595),(300, 50)), 30).lower()
-        if utilisateur_rep in reponse:
-            message="vous avez gagner une clé !"
-            afficher_texte(ecran, message, 50, (120, 500))
-            sleep(4)
+        utilisateur_rep=entrer_texte(ecran, ((120, 520),(300, 50)), 30).lower()
+        if utilisateur_rep in reponse and len(utilisateur_rep)>=3:
             return True
         else:
             nb_essais-=1
             if nb_essais==2:
                 message="La réponse est incorrecte, il vous reste 2 essais"
-                afficher_texte(ecran, message, 30, (120, 500))
+                afficher_texte(ecran, message, 30, (120, 610))
             elif nb_essais==1:
                 message = "La réponse est incorrecte, il vous reste 1 essai"
-                afficher_texte(ecran, message, 30, (120, 550))
+                afficher_texte(ecran, message, 30, (120, 650))
             else:
                 message="Vous avez échoué à l'énigme la solution était: " + str(reponse)
-                afficher_texte(ecran, message, 50, (120, 600))
+                afficher_texte(ecran, message, 40, (120, 680))
                 sleep(4)
                 return False
