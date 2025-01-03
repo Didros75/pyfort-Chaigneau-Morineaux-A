@@ -6,8 +6,8 @@ o Mathématiques (calculs de factorielles, équations, roulettes mathématiques)
 o Hasard (jeu de bonneteau, lancer de dés)
 o Logique (jeu de NIM)(épreuve extrêmement difficle)
 o Énigme du Père Fouras
-Lorsque vous gagnez une épreuve votre équipe reçoit une clé
-Gains de clés : Lors de chaque épreuve, un joueur est sélectionné pour y
-participer. S'il réussit, il gagne une clé. L’équipe peut accéder à la
-salle du trésor lorsqu’elle a récolté 3 clés
+Comment gagner des clés :
+Lors de chaque épreuve, un joueur est sélectionné pour y participer.
+S'il réussit, il gagne une clé. L’équipe peut accéder à la
+salle du trésor lorsqu’elle a récolté 3 clés.
 """
