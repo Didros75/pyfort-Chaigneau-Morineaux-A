@@ -1,4 +1,6 @@
 """ Dans ce module, nous allons mettre les fonctions utiles au deroulement de notre programme"""
+import pygame.time
+
 import fenetre_graphique
 from fenetre_graphique import *
 from epreuves_mathematiques import *
@@ -13,6 +15,8 @@ Menu_equipe = pygame.image.load('Assets/Menu_equipe.jpg')
 Menu_equipe = pygame.transform.scale(Menu_equipe, ecran.get_size())
 Menu_nb_equipe = pygame.image.load('Assets/nb_equipe.jpg')
 Menu_nb_equipe = pygame.transform.scale(Menu_nb_equipe, ecran.get_size())
+Menu_neutre=pygame.image.load('Assets/document_0.jpg')
+Menu_neutre=pygame.transform.scale(Menu_neutre, ecran.get_size())
 
 ecran = fenetre_graphique.ecran
 
@@ -29,30 +33,36 @@ def composer_equipe():
     nbJoueurs=0
     while nbJoueurs == 0:
         nbJoueurs=choix_multiple(["1 joueur", "2 joueurs", "3 joueurs"])
-    ecran.blit(Menu_equipe, (0, 0))
+    ecran.blit(Menu_neutre, (0, 0))
     e1=[]
     e2=[]
     for i in range(nbJoueurs*2):
         if i<nbJoueurs:
+            afficher_texte(ecran, "Equipe 1", 50, (80, 100))
 
+            afficher_texte(ecran, "Prenom :", 30, (80, 210))
+            afficher_texte(ecran, "Nom :", 30, (120, 300))
+            pygame.draw.rect(ecran, "black", ((200, 210), (300, 50)))
+            pygame.draw.rect(ecran, "black", ((200, 300), (300, 50)))
             prenom = entrer_texte(ecran, ((200, 210), (300, 50)), 24)
             nom = entrer_texte(ecran, ((200, 300), (300, 50)), 24)
             e1.append(prenom)
-            pygame.draw.rect(ecran, "black", ((200, 210), (300, 50)))
-            pygame.draw.rect(ecran, "black", ((200, 300), (300, 50)))
             for i in range(len(e1)):
                 afficher_texte(ecran, e1[i], 40, (200, 400+i*40))
         else:
+            afficher_texte(ecran, "Equipe 2", 50, (640, 100))
+
+            afficher_texte(ecran, "Prenom :", 30, (640, 210))
+            afficher_texte(ecran, "Nom :", 30, (680, 300))
+            pygame.draw.rect(ecran, "black", ((760, 210), (300, 50)))
+            pygame.draw.rect(ecran, "black", ((760, 300), (300, 50)))
             prenom = entrer_texte(ecran, ((760, 210), (300, 50)), 24)
             nom = entrer_texte(ecran, ((760, 300), (300, 50)), 24)
             e2.append(prenom)
-            pygame.draw.rect(ecran, "black", ((760, 210), (300, 50)))
-            pygame.draw.rect(ecran, "black", ((760, 300), (300, 50)))
+
             for i in range(len(e2)):
                 afficher_texte(ecran, e2[i], 40, (760, 400 + i * 40))
-
-
-
+        pygame.time.wait(1000)
 
         present = False
         for personne in donnees:
@@ -80,13 +90,13 @@ def menu_epreuves():
     liste_mini_jeux_hasard = ["Bonneteau"]
     categorie=""
     jeu=""
-    message="Choisis une catégorie parmis " + str(liste_catgories) + " : "
+    message="Choisis une catégorie"
 
     while categorie == "":
-        afficher_texte(ecran, message, 24, ((200, 550), (300, 70)))
+        afficher_texte(ecran, message, 50, ((100, 200), (300, 70)))
         categorie=liste_catgories[choix_multiple(liste_catgories)-1]
 
-    ecran.blit(boyard_fond, (0, 0))
+    ecran.blit(Menu_neutre, (0, 0))
 
     if categorie=="Maths":
         jeu=random.choice(liste_mini_jeux_maths)
@@ -112,7 +122,7 @@ def menu_epreuves():
 
 def choisir_joueur(equipe):
     candidat="^"
-    afficher_texte(ecran, "Choisir le joueur parmis " + str(equipe), 30, ((400, 400),(300, 300)))
+    afficher_texte(ecran, "Choisir le joueur", 50, ((100, 200),(300, 300)))
     while candidat == "^":
 
         if len(equipe)==1:

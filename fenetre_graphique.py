@@ -6,6 +6,7 @@ ecran = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 boyard2=pygame.image.load('Assets/img.png')
 boyard2 = pygame.transform.scale(boyard2, ecran.get_size())
 bouton_petit=pygame.image.load('Assets/bouton_petit.png')
+bouton_petit=pygame.transform.scale(bouton_petit, (200, 100))
 trois_choix=pygame.image.load('Assets/3choix.jpg')
 trois_choix=pygame.transform.scale(trois_choix,ecran.get_size())
 fenetre="Menu"
@@ -91,7 +92,7 @@ def afficher_batons_graphique(ecran, nb_batons):
 
 def creer_bouton(x, y, largeur, hauteur, surface, texte):
     rect = pygame.Rect(x, y, largeur, hauteur)
-    pygame.draw.rect(surface, (0, 128, 255), rect)  # Bleu
+    surface.blit(bouton_petit, (x, y))
     font = pygame.font.Font(None, 36)
     texte_surface = font.render(texte, True, (255, 255, 255))  # Blanc
     texte_rect = texte_surface.get_rect(center=rect.center)
