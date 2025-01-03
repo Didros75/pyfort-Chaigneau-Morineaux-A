@@ -137,8 +137,11 @@ def choisir_joueur(equipe):
 
 
 def epreuve_finale(equipe_numero, equipe):
-    score_incrementation(equipe)
-    print(equipe_numero, "a gagné !")
+    if salle_De_Tresor():
+        score_incrementation(equipe)
+        return True
+    return False
+
 
 def score_incrementation(equipe):
     with open('players_sauvegarde.json', 'r', encoding='utf-8') as f:
