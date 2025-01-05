@@ -1,3 +1,4 @@
+"""contient ici toutes les epeuves mathématiques, et envoie True si elles sont reussites"""
 import random
 import fenetre_graphique
 from fenetre_graphique import *
@@ -88,7 +89,6 @@ def epreuve_math_equation():
     pygame.display.flip()
     list=resoudre_equation_lineaire()
     resultat=arrondir(list[2])
-    print(resultat)
     afficher_texte(ecran, "Question :", 40, ((150, 200), (200, 200)))
     message="Resolvez l'equation "+ str(list[0]) +"x + "+ str(list[1]) + " (arrondi a la première decimale) : "
     afficher_texte(ecran, message, 24, ((150, 300), (200, 200)))

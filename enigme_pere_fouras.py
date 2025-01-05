@@ -1,3 +1,4 @@
+"""Dans ce module se trouve l'epreve des enigmes du père fouras"""
 import json
 import random
 from time import sleep
@@ -13,11 +14,13 @@ Menu_enigme = pygame.transform.scale(Menu_enigme, ecran.get_size())
 
 
 def charger_enigmes():
+    "retourne les enigmes sous forme d'une liste de dictionnaire"
     with open('enigmesPF.json', 'r', encoding='utf-8') as f:
         donnees = json.load(f)
         return donnees
 
 def enigme_pere_fouras():
+    "on va chercher la question a l'enigme, on la couple en segments pour un meilleur affichage, et on regarde si la reponse du joueur est dans la reponse attendue"
     ecran.blit(Menu_enigme, (0, 0))
     pygame.display.flip()
     donnees=charger_enigmes()
@@ -38,6 +41,7 @@ def enigme_pere_fouras():
     while nb_essais>0:
         utilisateur_rep=entrer_texte(ecran, ((120, 520),(300, 50)), 30).lower()
         if utilisateur_rep in reponse and len(utilisateur_rep)>=3:
+            #la condition de la taille est la pour eviter que le joueur ecrive seulement un A par exemple, et que ca lui compte bon l'enigme. Ainsi, si la reponse est La Pluie, le joueur aura bon meme s'il ne met que pluie.
             return True
         else:
             nb_essais-=1

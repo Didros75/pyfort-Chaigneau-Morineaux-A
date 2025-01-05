@@ -1,20 +1,19 @@
+"""Ici se trouvent toutes les fonctions utiles a l'affichage graphique ; on va retrouver l'equivalent du print du input et bien d'autre"""
 import pygame
 
 
 
 ecran = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-boyard2=pygame.image.load('Assets/img.png')
-boyard2 = pygame.transform.scale(boyard2, ecran.get_size())
 bouton_petit=pygame.image.load('Assets/bouton_petit.png')
 bouton_petit=pygame.transform.scale(bouton_petit, (200, 100))
-trois_choix=pygame.image.load('Assets/3choix.jpg')
-trois_choix=pygame.transform.scale(trois_choix,ecran.get_size())
+
 Menu_neutre=pygame.image.load('Assets/document_0.jpg')
 Menu_neutre=pygame.transform.scale(Menu_neutre, ecran.get_size())
 
 fenetre="Menu"
 
 def afficher_texte(ecran, texte, taille, position):
+    "fonction simple, mais vitale : elle prend en paramètre un texte, une taille de texte et enfin la position sur l'ecran. On aurait pu rajouter la couleur et la police mais on a préféré garder quelque chose de simple. Le parametre ecran est simplement la pour designer la fenetre où afficher. "
     font = pygame.font.SysFont('Comic Sans MS,Arial', taille)
     message = font.render(texte, True, "White")
     ecran.blit(message, position)
@@ -22,7 +21,7 @@ def afficher_texte(ecran, texte, taille, position):
 
 
 def choix_multiple(textes):
-
+    "Cette fonction est plus complexe ; elle prend en paramatre une liste de chaines de caracteres, et va ensuite creer un bouton pour chacun de ces textes. Enfin, elle va renvoyer le numero du bouton choisi. La fonction permet par exemple de choisir le joueur, ou la catégorie."
     screen_size = pygame.display.get_surface().get_size()
     largeur_ecran = screen_size[0]
     hauteur_ecran = screen_size[1]
@@ -61,6 +60,7 @@ def choix_multiple(textes):
 
 
 def entrer_texte(ecran, rect, taille):
+    "cette fonction fait office d'input ; elle crée un rectangle noir dans lequel le joueur va pouvoir entrer et supprimer du texte. Quand ce dernier appuira sur entrée, la fonction va return le texte. Elle prend en parametre une zone de texte et la taille d'ecriture"
     pygame.init()
     font = pygame.font.SysFont('Comic Sans MS,Arial', taille)
     user_input_value = ""
@@ -70,12 +70,10 @@ def entrer_texte(ecran, rect, taille):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_KP_ENTER:
+                if event.key == pygame.K_RETURN:
                     return user_input_value
                 elif event.key == pygame.K_BACKSPACE:
                     user_input_value = user_input_value[:-1]
-                if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
                 else:
                     user_input_value += event.unicode
 
@@ -91,6 +89,7 @@ def entrer_texte(ecran, rect, taille):
 
 
 def afficher_batons_graphique(ecran, nb_batons):
+    "cette fonction est utilisée uniquement dans l'affichage des batons du jeu de Nim. Elle separe l'exan en 20, et affiche le nombre de batons demandés en parametres"
     ecran.blit(Menu_neutre, (0, 0))
     screen_width = ecran.get_width()-50
     screen_height = ecran.get_height()
@@ -101,6 +100,7 @@ def afficher_batons_graphique(ecran, nb_batons):
         pygame.display.update()
 
 def creer_bouton(x, y, largeur, hauteur, surface, texte):
+    "permet comme son nom l'indique de creer un bouton. Le bouton a des coordonées x et y, une taille et un texte, tous donnés en paramètre, et va return un rect, c'est a dire un rectagle"
     rect = pygame.Rect(x, y, largeur, hauteur)
     surface.blit(bouton_petit, (x, y))
     font = pygame.font.Font(None, 36)
@@ -110,5 +110,6 @@ def creer_bouton(x, y, largeur, hauteur, surface, texte):
     return rect
 
 def clique_bouton(bouton):
+    "Renvoie true si on clique sur un bouton demandé en paramètre"
     mouse_pos = pygame.mouse.get_pos()
     return bouton.collidepoint(mouse_pos)
